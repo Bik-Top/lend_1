@@ -1,6 +1,5 @@
 <template>
     <table class="Animals" cellspacing="0" border="1">
-
         <caption colrow="5">
             <p>{{name}}</p>
         </caption>

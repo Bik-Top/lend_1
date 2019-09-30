@@ -1,116 +1,150 @@
 <template>
-    <div id="app">
+    <div class="bod">
 
-        <input type="text"  v-model="serchName" >
+        <!-- PRELOADER -->
 
-        <button @click="showAdress=!showAdress">
-            showAdress
-        </button>
+        <div id="preloader"><img src="images/nbloader1.gif" alt=""></div>
 
-        <div class="wrap" v-if="showAdress"  >
-            <Adress  :pupils="pupils"  > {{tempParam}}</Adress>
+        <!-- MAIN NAV -->
+        <a id="main-nav" href="#sidr"><span
+                class="flaticon-menu9"></span></a>
+
+        <div id="sidr" class="sidr">
+
+            <!-- MAIN NAV LOGO -->
+            <a href="#" id="menu-logo"><img src="../src/assets/images/menu-logo2.png" alt=""></a>
+
+            <ul>
+                <li><a href="#Home" ><span class="icons flaticon-house3"></span>Home</a>
+                </li>
+                <li><a href="#Features" ><span class="icons flaticon-drawer1"></span>Features</a>
+                </li>
+                <li><a href="#About" ><span class="icons flaticon-cursor7"></span>About</a>
+                </li>
+                <li><a href="#Video" ><span class="icons flaticon-key9"></span>Video</a>
+                </li>
+                <li><a href="#Clients" ><span class="icons flaticon-comment2"></span>Clients</a>
+                </li>
+                <li><a href="#Screenshots" ><span class="icons flaticon-camera19"></span>Screenshots</a>
+                </li>
+                <li><a href="#Pricing" ><span class="icons flaticon-tag10"></span>Pricing</a>
+                </li>
+                <li><a href="#Download" ><span class="icons flaticon-download11"></span>Download</a>
+                </li>
+                <li><a href="#Contact" ><span class="icons flaticon-small72"></span>Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- END MAIN NAV -->
+
+        <!-- PAGE LOGO -->
+        <div class="wrap">
+            <div id="logo">
+                <a href="#"><img src="../src/assets/images/neighbiz-logo.png" alt=""> </a>
+                <p class="tagline">We're about community. Handshakes. Business, big and small. Connecting with
+                    community.</p>
+            </div>
+        </div>
+        <!-- END PAGE LOGO -->
+
+        <!-- LANDING PAGE CONTENT -->
+        <div id="fullpage">
+
+
+
+            <Home id="section0"></Home>
+            <Features id="section1"></Features>
+            <About id="section2"></About>
+            <Video id="section3"></Video>
+            <Clients id="section4"></Clients>
+            <Screenshots id="section5"></Screenshots>
+            <Pricing id="section6"></Pricing>
+            <Download id="section7"></Download>
+            <Contact id="section8"></Contact>
+            <!-- отображаем тут компонент, для которого совпадает маршрут
+            <router-view></router-view>
+            <button v-scroll-to="{el:'#section0', onDone:onDone}" v-show="showGoBack" class="showGoBack" > go back</button>-->
         </div>
 
-
-
-        <Animals :cats="cats"></Animals>
-
-        <Serch/>
-
-
+        <!-- SOCIAL ICONS -->
+        <div class="wrap">
+            <div id="social-icons">
+                <ul>
+                    <li><a href=""><i class="flaticon-facebook6"></i></a> </li>
+                    <li><a href=""><i class="flaticon-social19"></i></a> </li>
+                    <li><a href=""><i class="flaticon-google16"></i></a> </li>
+                    <li><a href=""><i class="flaticon-social40"></i></a> </li>
+                    <li><a href=""><i class="flaticon-social7"></i></a> </li>
+                    <li><a href=""><i class="flaticon-logo3"></i></a> </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    import Adress from './components/Adress.vue'
-    import Animals from './components/Animals.vue'
-    import Serch from './Serch.vue'
+
+    import Home from './vives/Home'
+    import Features from './vives/Features'
+    import About from './vives/About'
+    import Video from './vives/Video'
+    import Clients from './vives/Clients'
+    import Screenshots from './vives/Screenshots'
+    import Pricing from './vives/Pricing'
+    import Download from './vives/Download'
+    import Contact from './vives/Contact'
 
     export default {
         name: 'app',
 
-        data(){
+        data() {
             return {
-                showAdress: true,
-                cats: [],
-                currentSort: 'name',
-                currentSortDir: 'asc',
-
-                tempParam: 'changeRow',
-
-                serchName: '',
-
-                pupils: [
-                    {name: "Maria", age: 22, registred: true, adress: "maria@gmail.dot", phone: "095 77 30 514"},
-                    {name: "Jhon", age: 32, registred: true, adress: "jhonLeona@gmail.dot", phone: "095 75 30 514"},
-                    {name: "Veronika", age: 25, registred: false, adress: "Veronika@gmail.dot", phone: "095 74 30 514"},
-                    {name: "Tibur", age: 35, registred: false, adress: "Timur@gmail.dot", phone: "095 73 30 514"}
-                ],
-
+                currentRoute: window.location.pathname,
+                showSidebar: false,
+                showGoBack: false
             }
         },
         components: {
-            Adress,
-            Animals,
-            Serch,
-
+            Home,
+            Features,
+            About,
+            Video,
+            Clients,
+            Screenshots,
+            Pricing,
+            Download,
+            Contact
         },
-
-
-        created() {
-            fetch('https://api.myjson.com/bins/s9lux')
-                .then(res => res.json())
-                .then(res => {
-                    this.cats = res;
-                })
-        },
-
         methods: {
-            inputText(el){
-                this.tempParam = el.target.value;
+            afterLeave () {
+                this.$root.$emit('triggerScroll')
             },
 
-            sort(s) {
-                //console.log('--s', s);
-                //if s == current sort, reverse
-                if (s === this.currentSort) {
-                    this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+
+            onDone(el) {
+                this.showGoBack = !this.showGoBack;
+                console.log( this )
+            },
+            showSidebarHendler() {
+
+                if (this.showSidebar) {
+                    document.body.classList.remove('sidr-open')
+                    sidr.style.display = ''
+                } else {
+                    document.body.classList.add('sidr-open')
+                    sidr.style.display = 'block'
                 }
-                this.currentSort = s;
+                this.showSidebar = !this.showSidebar;
             },
-
-        },
-        computed: {
-
-        },
-
+        }
 
     }
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        color: #2c3e50;
-
-        display: grid;
-
-        grid-template-columns: repeat(2, min-content);
-        align-items: center;
-        justify-content: center;
-        grid-gap: 15px  15px;
-
-    }
-    caption{
-        background-color: aquamarine;
-    }
-    th{
-        cursor: pointer;
-    }
-    th:hover{
-        background-color: rgba(127, 255, 212, 0.25);
-    }
-    td {
-        padding: 5px;
+    .showGoBack {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
     }
 </style>
