@@ -1,22 +1,6 @@
 <template>
     <div class="section " id="section1">
-
-        <!-- RIGHT HAND & PHONE MOCK-UP IMAGES -->
-        <div class="wrap">
-            <div class="section-image">
-                <!-- Home IMAGE --><img src="images/hello3.jpg" alt="Handy Help">
-                <!-- Features IMAGE --><img src="images/HH2.jpg" alt="Features">
-                <!-- About IMAGE --><img src="images/profile-lp.jpg" alt="About">
-                <!-- Video IMAGE --><img src="images/hello3.jpg" alt="Video">
-                <!-- Clients IMAGE --><img src="images/jumpmenu.jpg" alt="HH Jump Menu">
-                <!-- Screenshots IMAGE --><img src="images/HH.jpg" alt="Screenshots">
-                <!-- Pricing IMAGE --><img src="images/hello3.jpg" alt="Pricing">
-                <!-- Download IMAGE --><img src="images/huddles2.jpg" alt="Download">
-                <!-- Contact IMAGE --><img src="images/contactKriekie.jpg" alt="Contact">
-            </div>
-            <div id="hand"></div>
-        </div>
-        <!-- END RIGHT HAND & PHONE MOCK-UP -->
+        
         <div class="wrap">
             <div class="box">
                 <!-- SECTION FEATURES CONTENT -->
